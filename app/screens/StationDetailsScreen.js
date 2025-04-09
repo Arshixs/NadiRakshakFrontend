@@ -6,13 +6,18 @@ import {
   ScrollView,
   ActivityIndicator,
   Dimensions,
-  StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
-import { LineChart } from "react-native-chart-kit";
+import {
+  VictoryLine,
+  VictoryChart,
+  VictoryTheme,
+  VictoryAxis,
+  VictoryLegend,
+} from "victory-native";
 import ToastComponent, { showToast } from "../components/Toast";
 import { BackendUrl } from "../../secrets";
 
@@ -95,46 +100,16 @@ export default function StationDetailsScreen() {
 
     const data = parameterData[selectedParameter];
 
-    // Prepare data for min values
-    const minData = {
-      labels: data.map((item) => item.year),
-      datasets: [
-        {
-          data: data.map((item) => item.min || 0),
-          color: (opacity = 1) => `rgba(38, 115, 219, ${opacity})`,
-          strokeWidth: 2,
-        },
-      ],
-      legend: ["Minimum Value"],
-    };
+    // Format data for Victory charts
+    const minData = data.map((item) => ({
+      x: item.year.toString(),
+      y: item.min || 0,
+    }));
 
-    // Prepare data for max values
-    const maxData = {
-      labels: data.map((item) => item.year),
-      datasets: [
-        {
-          data: data.map((item) => item.max || 0),
-          color: (opacity = 1) => `rgba(219, 68, 55, ${opacity})`,
-          strokeWidth: 2,
-        },
-      ],
-      legend: ["Maximum Value"],
-    };
-
-    const chartConfig = {
-      backgroundGradientFrom: "#ffffff",
-      backgroundGradientTo: "#ffffff",
-      decimalPlaces: 2,
-      color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-      style: {
-        borderRadius: 16,
-      },
-      propsForDots: {
-        r: "6",
-        strokeWidth: "2",
-      },
-    };
+    const maxData = data.map((item) => ({
+      x: item.year.toString(),
+      y: item.max || 0,
+    }));
 
     return (
       <View className="mb-8">
@@ -145,51 +120,91 @@ export default function StationDetailsScreen() {
         {/* Min Values Chart */}
         <View className="bg-white rounded-lg p-4 mb-4 shadow-sm">
           <Text className="text-gray-800 font-medium mb-2">Minimum Values</Text>
-          <LineChart
-            data={minData}
+          <VictoryChart
             width={screenWidth - 32}
             height={220}
-            chartConfig={chartConfig}
-            bezier
+            domainPadding={{ x: 20 }}
             style={{
-              marginVertical: 8,
-              borderRadius: 16,
+              background: { fill: "#f8fafc" },
+              parent: { background: { fill: "#f8fafc" } },
             }}
-          />
+          >
+            <VictoryLegend
+              x={125}
+              y={10}
+              centerTitle
+              orientation="horizontal"
+              data={[{ name: "Minimum Values", symbol: { fill: "#2673DB" } }]}
+            />
+            <VictoryAxis
+              tickFormat={(t) => t}
+              style={{
+                axis: { stroke: "#94a3b8" },
+                tickLabels: { fontSize: 12, padding: 5, fill: "#64748b" },
+              }}
+            />
+            <VictoryAxis
+              dependentAxis
+              style={{
+                axis: { stroke: "#94a3b8" },
+                tickLabels: { fontSize: 12, padding: 5, fill: "#64748b" },
+              }}
+            />
+            <VictoryLine
+              data={minData}
+              style={{
+                data: { stroke: "#2673DB", strokeWidth: 3 },
+                parent: { border: "1px solid #ccc" },
+              }}
+            />
+          </VictoryChart>
         </View>
 
         {/* Max Values Chart */}
         <View className="bg-white rounded-lg p-4 shadow-sm">
           <Text className="text-gray-800 font-medium mb-2">Maximum Values</Text>
-          <LineChart
-            data={maxData}
+          <VictoryChart
             width={screenWidth - 32}
             height={220}
-            chartConfig={{
-              ...chartConfig,
-              color: (opacity = 1) => `rgba(219, 68, 55, ${opacity})`,
-            }}
-            bezier
+            domainPadding={{ x: 20 }}
             style={{
-              marginVertical: 8,
-              borderRadius: 16,
+              background: { fill: "#f8fafc" },
+              parent: { background: { fill: "#f8fafc" } },
             }}
-          />
+          >
+            <VictoryLegend
+              x={125}
+              y={10}
+              centerTitle
+              orientation="horizontal"
+              data={[{ name: "Maximum Values", symbol: { fill: "#DB4437" } }]}
+            />
+            <VictoryAxis
+              tickFormat={(t) => t}
+              style={{
+                axis: { stroke: "#94a3b8" },
+                tickLabels: { fontSize: 12, padding: 5, fill: "#64748b" },
+              }}
+            />
+            <VictoryAxis
+              dependentAxis
+              style={{
+                axis: { stroke: "#94a3b8" },
+                tickLabels: { fontSize: 12, padding: 5, fill: "#64748b" },
+              }}
+            />
+            <VictoryLine
+              data={maxData}
+              style={{
+                data: { stroke: "#DB4437", strokeWidth: 3 },
+                parent: { border: "1px solid #ccc" },
+              }}
+            />
+          </VictoryChart>
         </View>
       </View>
     );
   };
-
-  if (loading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#2563eb" />
-        <Text className="text-blue-600 mt-4 font-medium">
-          Loading station data...
-        </Text>
-      </View>
-    );
-  }
 
   if (error) {
     return (

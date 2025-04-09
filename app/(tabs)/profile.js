@@ -357,7 +357,6 @@ export default function ProfileScreen() {
             borderRadius: 12,
           }}
         >
-          <Text>Hello</Text>
         </View>
       </ScrollView>
       <ToastComponent />

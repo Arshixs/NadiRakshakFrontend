@@ -12,7 +12,7 @@ import {
 import { Link, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { PrimaryButton } from "../components/Button.js";
-import { Mail } from "lucide-react-native";
+import Icon from "react-native-vector-icons/Feather";
 import { BackendUrl } from "../../secrets.js";
 import ToastComponent, { showToast } from "../components/Toast.js"; // Import Toast
 
@@ -79,7 +79,7 @@ export default function ForgotPasswordScreen() {
             <View className="mb-4">
               <Text className="text-sm font-medium text-gray-700 mb-1">Email</Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <Mail color="#4B5563" size={18} />
+                <Icon name="mail" color="#4B5563" size={18} />
                 <TextInput
                   className="flex-1 ml-2 text-base"
                   placeholder="Enter your email"

@@ -13,7 +13,7 @@ import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import ToastComponent, { showToast } from "../components/Toast"; // Toast Component
 import { PrimaryButton } from "../components/Button"; // Reusable Button
-import { Lock } from "lucide-react-native"; // Password Icon
+import Icon from "react-native-vector-icons/Feather"; 
 import { BackendUrl } from "../../secrets.js";
 
 export default function ResetPasswordScreen() {
@@ -90,7 +90,7 @@ export default function ResetPasswordScreen() {
             <View className="mb-4">
               <Text className="text-sm font-medium text-gray-700 mb-1">New Password</Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <Lock color="#4B5563" size={18} />
+                <Icon name="lock" color="#4B5563" size={18} />
                 <TextInput
                   className="flex-1 ml-2 text-base"
                   placeholder="Enter new password"
@@ -105,7 +105,7 @@ export default function ResetPasswordScreen() {
             <View className="mb-4">
               <Text className="text-sm font-medium text-gray-700 mb-1">Confirm Password</Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <Lock color="#4B5563" size={18} />
+                <Icon name="lock" color="#4B5563" size={18} />
                 <TextInput
                   className="flex-1 ml-2 text-base"
                   placeholder="Confirm new password"

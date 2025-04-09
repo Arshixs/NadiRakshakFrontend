@@ -8,7 +8,7 @@ import * as SecureStore from "expo-secure-store";
 import { BackendUrl } from "../../secrets.js";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
-import { Camera, MapPin, Calendar, Users, FileImage, AlignLeft, FileText, Tag } from "lucide-react-native";
+import Icon from "react-native-vector-icons/Feather";
 
 export default function CreateCampaign() {
   const router = useRouter();
@@ -44,7 +44,7 @@ export default function CreateCampaign() {
     if (errors.length > 0) {
       showToast("error", errors.join(" "));
       return;
-}
+    }
 
     setLoading(true);
 
@@ -112,8 +112,7 @@ export default function CreateCampaign() {
 
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
-      <ScrollView showsVerticalScrollIndicator={false}
-       keyboardShouldPersistTaps={"always"}>
+      <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps={"always"}>
         {/* Header with image overlay */}
         <View className="relative">
           <Image 
@@ -136,9 +135,11 @@ export default function CreateCampaign() {
             
             {/* Title Input */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 mb-1">Campaign Title <Text className="text-red-500">*</Text> </Text>
+              <Text className="text-sm font-medium text-gray-700 mb-1">
+                Campaign Title <Text className="text-red-500">*</Text>
+              </Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <FileText color="#4B5563" size={18} />
+                <Icon name="file-text" color="#4B5563" size={18} />
                 <TextInput 
                   className="flex-1 ml-2 text-base"
                   placeholder="Enter campaign title" 
@@ -150,10 +151,12 @@ export default function CreateCampaign() {
             
             {/* Description Input - FIXED ALIGNMENT */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 mb-1">Campaign Description <Text className="text-red-500">*</Text> </Text>
+              <Text className="text-sm font-medium text-gray-700 mb-1">
+                Campaign Description <Text className="text-red-500">*</Text>
+              </Text>
               <View className="border border-gray-300 rounded-lg p-3 bg-gray-50">
                 <View className="flex-row">
-                  <AlignLeft color="#4B5563" size={18} />
+                  <Icon name="align-left" color="#4B5563" size={18} />
                   <View className="flex-1 ml-2">
                     <TextInput 
                       className="text-base"
@@ -172,9 +175,11 @@ export default function CreateCampaign() {
             
             {/* Location Input */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 mb-1">Location  <Text className="text-red-500">*</Text> </Text>
+              <Text className="text-sm font-medium text-gray-700 mb-1">
+                Location <Text className="text-red-500">*</Text>
+              </Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <MapPin color="#4B5563" size={18} />
+                <Icon name="map-pin" color="#4B5563" size={18} />
                 <TextInput 
                   className="flex-1 ml-2 text-base"
                   placeholder="Event location" 
@@ -186,9 +191,11 @@ export default function CreateCampaign() {
             
             {/* Max Participants Input */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 mb-1">Maximum Participants <Text className="text-red-500">*</Text> </Text>
+              <Text className="text-sm font-medium text-gray-700 mb-1">
+                Maximum Participants <Text className="text-red-500">*</Text>
+              </Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <Users color="#4B5563" size={18} />
+                <Icon name="users" color="#4B5563" size={18} />
                 <TextInput 
                   className="flex-1 ml-2 text-base"
                   placeholder="Number of participants" 
@@ -201,10 +208,12 @@ export default function CreateCampaign() {
             
             {/* Category Dropdown */}
             <View className="mb-4">
-              <Text className="text-sm font-medium text-gray-700 mb-1">Category <Text className="text-red-500">*</Text> </Text>
+              <Text className="text-sm font-medium text-gray-700 mb-1">
+                Category <Text className="text-red-500">*</Text>
+              </Text>
               <View className="border border-gray-300 rounded-lg overflow-hidden bg-gray-50">
                 <View className="flex-row items-center px-3">
-                  <Tag color="#4B5563" size={18} />
+                  <Icon name="tag" color="#4B5563" size={18} />
                   <View className="flex-1 ml-2">
                     <Picker
                       selectedValue={category}
@@ -225,7 +234,9 @@ export default function CreateCampaign() {
 
           {/* Date Section */}
           <View className="bg-white p-5 rounded-xl shadow-sm mb-6">
-            <Text className="text-lg font-semibold mb-4 text-gray-800">Schedule <Text className="text-red-500">*</Text> </Text>
+            <Text className="text-lg font-semibold mb-4 text-gray-800">
+              Schedule <Text className="text-red-500">*</Text>
+            </Text>
             
             {/* Start Date Picker */}
             <View className="mb-4">
@@ -234,7 +245,7 @@ export default function CreateCampaign() {
                 className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50" 
                 onPress={() => setShowStartPicker(true)}
               >
-                <Calendar color="#4B5563" size={18} />
+                <Icon name="calendar" color="#4B5563" size={18} />
                 <Text className="ml-2 text-gray-700">{startDate.toDateString()}</Text>
               </TouchableOpacity>
               {showStartPicker && (
@@ -262,7 +273,7 @@ export default function CreateCampaign() {
                 className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50" 
                 onPress={() => setShowEndPicker(true)}
               >
-                <Calendar color="#4B5563" size={18} />
+                <Icon name="calendar" color="#4B5563" size={18} />
                 <Text className="ml-2 text-gray-700">{endDate.toDateString()}</Text>
               </TouchableOpacity>
               {showEndPicker && (
@@ -281,7 +292,9 @@ export default function CreateCampaign() {
 
           {/* Media Section */}
           <View className="bg-white p-5 rounded-xl shadow-sm mb-6">
-            <Text className="text-lg font-semibold mb-4 text-gray-800">Campaign Media <Text className="text-red-500">*</Text> </Text>
+            <Text className="text-lg font-semibold mb-4 text-gray-800">
+              Campaign Media <Text className="text-red-500">*</Text>
+            </Text>
             
             {/* Image Preview */}
             {image && (
@@ -299,8 +312,10 @@ export default function CreateCampaign() {
               className="flex-row items-center justify-center bg-gray-100 p-4 rounded-lg border border-dashed border-gray-300"
               onPress={pickImage}
             >
-              <FileImage color="#4B5563" size={20} />
-              <Text className="ml-2 text-gray-700 font-medium">{image ? "Change Image" : "Upload Campaign Image"}</Text>
+              <Icon name="image" color="#4B5563" size={20} />
+              <Text className="ml-2 text-gray-700 font-medium">
+                {image ? "Change Image" : "Upload Campaign Image"}
+              </Text>
             </TouchableOpacity>
           </View>
 

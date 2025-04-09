@@ -13,8 +13,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { Lock, Mail, EyeOff, Eye } from "lucide-react-native";
-
+import Icon from "react-native-vector-icons/Feather";
 import { BackendUrl } from "../../secrets.js";
 import ToastComponent, { showToast } from "../components/Toast.js"; // Import Toast Component
 
@@ -53,7 +52,7 @@ export default function LoginScreen() {
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <StatusBar style="dark" />
-      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={Platform.OS === 'ios'?100:0}>
+      <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="always">
           {/* Header with Image Overlay */}
           <View className="relative">
@@ -66,9 +65,7 @@ export default function LoginScreen() {
             />
             <View className="absolute inset-0 bg-black/40 flex justify-end">
               <View className="p-4">
-                <Text className="text-white text-3xl font-bold">
-                  Nadi Rakshak
-                </Text>
+                <Text className="text-white text-3xl font-bold">Nadi Rakshak</Text>
                 <Text className="text-white text-lg opacity-90">
                   River Pollution Reporting
                 </Text>
@@ -89,7 +86,7 @@ export default function LoginScreen() {
                   Email
                 </Text>
                 <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                  <Mail color="#4B5563" size={18} />
+                  <Icon name="mail" color="#4B5563" size={18} />
                   <TextInput
                     className="flex-1 ml-2 text-base"
                     placeholder="Enter your email"
@@ -107,7 +104,7 @@ export default function LoginScreen() {
                   Password
                 </Text>
                 <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                  <Lock color="#4B5563" size={18} />
+                  <Icon name="lock" color="#4B5563" size={18} />
                   <TextInput
                     className="flex-1 ml-2 text-base"
                     placeholder="Enter password"
@@ -119,9 +116,9 @@ export default function LoginScreen() {
                     onPress={() => setIsPasswordVisible(!isPasswordVisible)}
                   >
                     {isPasswordVisible ? (
-                      <Eye color="#4B5563" size={18} />
+                      <Icon name="eye" color="#4B5563" size={18} />
                     ) : (
-                      <EyeOff color="#4B5563" size={18} />
+                      <Icon name="eye-off" color="#4B5563" size={18} />
                     )}
                   </TouchableOpacity>
                 </View>
@@ -129,11 +126,8 @@ export default function LoginScreen() {
 
               {/* Forgot Password */}
               <View className="items-end mb-6">
-                <TouchableOpacity>
-                  <Text
-                    className="text-blue-600 font-semibold"
-                    onPress={() => router.push("/screens/forgot-password")}
-                  >
+                <TouchableOpacity onPress={() => router.push("/screens/forgot-password")}>
+                  <Text className="text-blue-600 font-semibold">
                     Forgot Password?
                   </Text>
                 </TouchableOpacity>
@@ -151,27 +145,18 @@ export default function LoginScreen() {
 
               {/* Sign Up Link */}
               <View className="flex-row justify-center mt-4">
-                <Text className="text-gray-700">Don't have an account? </Text>
+                <Text className="text-gray-700">
+                  Don't have an account?{" "}
+                </Text>
 
-                <TouchableOpacity>
-                  <Text
-                    className="text-blue-600 font-semibold"
-                    onPress={() => router.push("/screens/signup")}
-                  >
-                    Sign Up
-                  </Text>
+                <TouchableOpacity onPress={() => router.push("/screens/signup")}>
+                  <Text className="text-blue-600 font-semibold">Sign Up</Text>
                 </TouchableOpacity>
               </View>
-              <View className="flex-row justify-center m">
+              <View className="flex-row justify-center">
                 <Text className="text-gray-700">Go back to </Text>
-
-                <TouchableOpacity>
-                  <Text
-                    className="text-blue-600 font-semibold"
-                    onPress={() => router.push("/")}
-                  >
-                    Home
-                  </Text>
+                <TouchableOpacity onPress={() => router.push("/")}>
+                  <Text className="text-blue-600 font-semibold">Home</Text>
                 </TouchableOpacity>
               </View>
             </View>

@@ -8,7 +8,7 @@ import * as SecureStore from "expo-secure-store";
 import { BackendUrl } from "../../secrets.js";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
-import { MapPin, Calendar, Users, FileImage, AlignLeft, FileText, Tag } from "lucide-react-native";
+import Icon from "react-native-vector-icons/Feather";
 
 export default function UpdateCampaign() {
   const router = useRouter();
@@ -241,7 +241,7 @@ export default function UpdateCampaign() {
             <View className="mb-4">
               <Text className="text-sm font-medium text-gray-700 mb-1">Campaign Title</Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <FileText color="#4B5563" size={18} />
+                <Icon name="file-text" size={18} color="#4B5563" />
                 <TextInput 
                   className="flex-1 ml-2 text-base"
                   placeholder="Enter campaign title" 
@@ -256,7 +256,7 @@ export default function UpdateCampaign() {
               <Text className="text-sm font-medium text-gray-700 mb-1">Campaign Description</Text>
               <View className="border border-gray-300 rounded-lg p-3 bg-gray-50">
                 <View className="flex-row">
-                  <AlignLeft color="#4B5563" size={18} />
+                  <Icon name="align-left" size={18} color="#4B5563" />
                   <View className="flex-1 ml-2">
                     <TextInput 
                       className="text-base"
@@ -277,7 +277,7 @@ export default function UpdateCampaign() {
             <View className="mb-4">
               <Text className="text-sm font-medium text-gray-700 mb-1">Location</Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <MapPin color="#4B5563" size={18} />
+                <Icon name="map-pin" size={18} color="#4B5563" />
                 <TextInput 
                   className="flex-1 ml-2 text-base"
                   placeholder="Event location" 
@@ -291,7 +291,7 @@ export default function UpdateCampaign() {
             <View className="mb-4">
               <Text className="text-sm font-medium text-gray-700 mb-1">Maximum Participants</Text>
               <View className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50">
-                <Users color="#4B5563" size={18} />
+                <Icon name="users" size={18} color="#4B5563" />
                 <TextInput 
                   className="flex-1 ml-2 text-base"
                   placeholder="Number of participants" 
@@ -307,7 +307,7 @@ export default function UpdateCampaign() {
               <Text className="text-sm font-medium text-gray-700 mb-1">Category</Text>
               <View className="border border-gray-300 rounded-lg overflow-hidden bg-gray-50">
                 <View className="flex-row items-center px-3">
-                  <Tag color="#4B5563" size={18} />
+                  <Icon name="tag" size={18} color="#4B5563" />
                   <View className="flex-1 ml-2">
                     <Picker
                       selectedValue={category}
@@ -337,7 +337,7 @@ export default function UpdateCampaign() {
                 className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50" 
                 onPress={() => setShowStartPicker(true)}
               >
-                <Calendar color="#4B5563" size={18} />
+                <Icon name="calendar" size={18} color="#4B5563" />
                 <Text className="ml-2 text-gray-700">{startDate.toDateString()}</Text>
               </TouchableOpacity>
               {showStartPicker && (
@@ -360,7 +360,7 @@ export default function UpdateCampaign() {
                 className="flex-row items-center border border-gray-300 rounded-lg p-3 bg-gray-50" 
                 onPress={() => setShowEndPicker(true)}
               >
-                <Calendar color="#4B5563" size={18} />
+                <Icon name="calendar" size={18} color="#4B5563" />
                 <Text className="ml-2 text-gray-700">{endDate.toDateString()}</Text>
               </TouchableOpacity>
               {showEndPicker && (
@@ -397,7 +397,7 @@ export default function UpdateCampaign() {
               className="flex-row items-center justify-center bg-gray-100 p-4 rounded-lg border border-dashed border-gray-300"
               onPress={pickImage}
             >
-              <FileImage color="#4B5563" size={20} />
+              <Icon name="image" size={20} color="#4B5563" />
               <Text className="ml-2 text-gray-700 font-medium">Change Campaign Image</Text>
             </TouchableOpacity>
           </View>
